@@ -1,0 +1,59 @@
+1)
+from itertools import product
+def fun(x, y, z):
+    return((x or y) and (not x or y or not z))
+
+print('x y z F')
+
+for x, y, z in product({0,1}, repeat = 3):
+    print(x, y, z, fun(x, y, z) )
+
+2)
+
+def fun(x, A):
+    return((x & 21 == 0) or ((x & 11 == 0) <= (x & A != 0)))
+
+for A in range(100):
+    c = 1
+    for x in range(300):
+        if fun(x, A) == 0:
+            c = 0
+    if c == 1:
+        print(A)
+        break
+
+3) недорешено
+def is_prime(n):
+    if n % 2 == 0 and n != 2:
+        return False
+    for i in range(3, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def fun(n):
+    c = 0
+    for i in range(2, n):
+        if is_prime(i) == True:
+            if n % i == 0:
+                c = c + 1
+                while n % i != 0:
+                    n / i
+            if c > 2:
+                return False
+    if c == 2:
+        return True
+    return False
+
+k = 0
+S = 0
+for x in range(3, 15):
+    if fun(x) == True:
+        print(x, fun(x))
+        k = k + 1
+        S = S + x
+
+print('S = ', S)
+print('k = ', k)
+
+print('среднее арифметическое:', S/k)   
